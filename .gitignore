@@ -1,0 +1,19 @@
+.DS_Store
+*.log
+*.tmp
+coverage.out
+
+# Go
+backend/bin/
+backend/.cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+.venv/
+__pycache__/
+
+# Docker
+**/.docker/

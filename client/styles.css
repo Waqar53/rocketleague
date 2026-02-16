@@ -1,0 +1,187 @@
+:root {
+  --bg: #041120;
+  --panel: rgba(6, 20, 34, 0.84);
+  --line: rgba(108, 191, 255, 0.35);
+  --text: #eaf4ff;
+  --orange: #f67e2e;
+  --blue: #3b8efc;
+  --accent: #8eeec6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Rajdhani", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top, #0f2b44 0%, var(--bg) 55%, #02060d 100%);
+}
+
+#game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#hud {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 20;
+  pointer-events: none;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+#scoreboard {
+  justify-self: center;
+  display: inline-grid;
+  grid-template-columns: 90px 120px 90px;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: rgba(8, 16, 29, 0.75);
+  border-radius: 12px;
+  overflow: hidden;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+#score-orange,
+#score-blue,
+#timer {
+  padding: 8px 10px;
+  font-size: 1.1rem;
+}
+
+#score-orange {
+  background: linear-gradient(180deg, #f89e3e 0%, #dc6124 100%);
+}
+
+#score-blue {
+  background: linear-gradient(180deg, #66a8ff 0%, #2f6adf 100%);
+}
+
+#timer {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+#status,
+#match-event,
+#telemetry {
+  justify-self: center;
+  background: rgba(6, 12, 22, 0.7);
+  border: 1px solid rgba(134, 200, 255, 0.3);
+  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+#match-event {
+  min-height: 30px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#telemetry {
+  display: flex;
+  gap: 18px;
+  font-size: 0.9rem;
+}
+
+.panel {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 30;
+  width: min(360px, calc(100% - 36px));
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  backdrop-filter: blur(6px);
+}
+
+.panel h1 {
+  margin: 0;
+  font-size: 1.45rem;
+}
+
+.panel p {
+  margin: 6px 0 14px;
+  color: rgba(234, 244, 255, 0.86);
+}
+
+.panel label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  color: rgba(234, 244, 255, 0.82);
+}
+
+.panel input {
+  margin-top: 6px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(130, 185, 255, 0.35);
+  background: rgba(1, 8, 14, 0.72);
+  color: var(--text);
+  font-size: 1rem;
+  padding: 9px 10px;
+}
+
+.panel button {
+  width: 100%;
+  margin-top: 6px;
+  border: none;
+  border-radius: 10px;
+  padding: 11px;
+  background: linear-gradient(135deg, #25b6a5 0%, #2d8ef5 100%);
+  color: #f5fbff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.panel button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+#help p {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: rgba(204, 224, 245, 0.84);
+}
+
+@media (max-width: 720px) {
+  #scoreboard {
+    grid-template-columns: 72px 106px 72px;
+  }
+
+  #score-orange,
+  #score-blue,
+  #timer {
+    font-size: 0.95rem;
+  }
+
+  #telemetry {
+    gap: 10px;
+    font-size: 0.8rem;
+  }
+
+  .panel {
+    padding: 12px;
+  }
+}

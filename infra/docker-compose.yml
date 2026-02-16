@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+  gameserver:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE: gameserver
+    environment:
+      GAME_ADDR: ":9003"
+      MATCH_DURATION_SEC: "300"
+    ports:
+      - "9003:9003"
+
+  matchmaker:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE: matchmaker
+    environment:
+      MATCHMAKER_ADDR: ":9001"
+      GAME_WS_ADDR: "ws://localhost:9003/ws"
+    depends_on:
+      - gameserver
+    ports:
+      - "9001:9001"
+
+  gateway:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE: gateway
+    environment:
+      GATEWAY_ADDR: ":9000"
+      MATCHMAKER_HTTP: "http://matchmaker:9001"
+    depends_on:
+      - matchmaker
+    ports:
+      - "9000:9000"
+
+  telemetry:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE: telemetry
+    environment:
+      TELEMETRY_ADDR: ":9002"
+    ports:
+      - "9002:9002"
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - telemetry
+
+  web:
+    image: python:3.12-alpine
+    working_dir: /app
+    command: python -m http.server 5173 --directory /app
+    volumes:
+      - ../client:/app:ro
+    ports:
+      - "5173:5173"

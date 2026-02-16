@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Velocity - Live Playtest</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="hud">
+        <div id="scoreboard">
+          <span id="score-orange">0</span>
+          <span id="timer">05:00</span>
+          <span id="score-blue">0</span>
+        </div>
+        <div id="status">Ready</div>
+        <div id="match-event"></div>
+        <div id="telemetry">
+          <span>Boost: <strong id="boost">0</strong></span>
+          <span>Ping: <strong id="ping">--</strong> ms</span>
+          <span>Players: <strong id="players">0</strong></span>
+        </div>
+      </div>
+
+      <div id="menu" class="panel">
+        <h1>Project Velocity</h1>
+        <p>Competitive car-soccer playtest client</p>
+        <label>
+          Gateway URL
+          <input id="gateway-url" type="text" value="http://localhost:9000" />
+        </label>
+        <label>
+          Display Name
+          <input id="display-name" type="text" value="Pilot" maxlength="24" />
+        </label>
+        <button id="start-btn">Start Match</button>
+        <div id="help">
+          <p>Controls: W/S throttle, A/D steer, Shift boost, Space jump, Ctrl handbrake</p>
+        </div>
+      </div>
+
+      <canvas id="game-canvas" tabindex="0"></canvas>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
