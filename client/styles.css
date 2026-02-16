@@ -154,6 +154,10 @@ body,
   cursor: pointer;
 }
 
+#start-offline-btn {
+  background: linear-gradient(135deg, #ffa542 0%, #ff6233 100%);
+}
+
 .panel button:disabled {
   cursor: wait;
   opacity: 0.7;
